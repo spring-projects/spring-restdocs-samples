@@ -1,0 +1,78 @@
+= Spring REST Docs Samples
+
+
+
+== Overview
+This repository contains a number of samples for https://github.com/spring-projects/spring-restdocs[Spring REST Docs] built using Spring Boot.
+
+
+
+=== MockMvc
+
+|===
+| Sample | Build System | Description
+
+| link:restful-notes-spring-data-rest[restful-notes-spring-data-rest]
+| Maven
+| Demonstrates the creation of a getting started guide and an API guide for a service implemented with https://spring.io/projects/spring-data-rest/[Spring Data REST].
+
+| link:restful-notes-spring-hateoas[restful-notes-spring-hateoas]
+| Gradle
+| Demonstrates the creation of a getting started guide and an API guide for a service implemented with https://spring.io/projects/spring-hateoas/[Spring HATEOAS].
+
+|===
+
+
+
+=== WebTestClient
+
+|===
+| Sample  | Build System | Description
+
+| link:web-test-client[web-test-client]
+| Gradle
+| Demonstrates the use of Spring REST Docs with Spring WebFlux’s WebTestClient.
+
+|===
+
+
+
+=== REST Assured
+
+|===
+| Sample | Build System | Description
+
+| link:rest-assured[rest-assured]
+| Gradle
+| Demonstrates the use of Spring REST Docs with https://rest-assured.io[REST Assured].
+
+|===
+
+
+
+=== Advanced
+
+|===
+| Sample | Build System | Description
+
+| link:restful-notes-slate[restful-notes-slate]
+| Gradle
+| Demonstrates the use of Spring REST Docs with Markdown and https://github.com/slatedocs/slate[Slate].
+
+| link:testng[testng]
+| Gradle
+| Demonstrates the use of Spring REST Docs with https://testng.org/doc/[TestNG].
+
+|===
+
+
+
+== Contributing
+
+Contributors to this repository agree to uphold its link:CODE_OF_CONDUCT.adoc[code of conduct].
+
+
+
+== Licence
+
+The Spring REST Docs Samples are open source software released under the https://www.apache.org/licenses/LICENSE-2.0.html[Apache 2.0 license].
