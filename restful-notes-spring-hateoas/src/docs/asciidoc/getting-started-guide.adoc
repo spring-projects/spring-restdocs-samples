@@ -24,14 +24,14 @@ The first step is to clone the Git repository:
 
 [source,bash]
 ----
-$ git clone https://github.com/spring-projects/spring-restdocs
+$ git clone https://github.com/spring-projects/spring-restdocs-samples
 ----
 
 Once the clone is complete, you're ready to get the service up and running:
 
 [source,bash]
 ----
-$ cd samples/rest-notes-spring-hateoas
+$ cd restful-notes-spring-hateoas
 $ ./gradlew build
 $ java -jar build/libs/*.jar
 ----
