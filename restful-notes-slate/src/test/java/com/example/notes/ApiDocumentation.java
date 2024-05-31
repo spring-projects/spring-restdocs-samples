@@ -46,6 +46,7 @@ import org.springframework.hateoas.MediaTypes;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.restdocs.templates.TemplateFormats;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -75,7 +76,7 @@ class ApiDocumentation {
 	@BeforeEach
 	public void setUp(RestDocumentationContextProvider restDocumentation) {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
-				.apply(documentationConfiguration(restDocumentation)).build();
+				.apply(documentationConfiguration(restDocumentation).snippets().withTemplateFormat(TemplateFormats.markdown())).build();
 	}
 
 	@Test
