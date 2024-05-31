@@ -143,7 +143,7 @@ under the License.
     languages = l;
 
     var presetLanguage = getLanguageFromQueryString();
-    if (presetLanguage) {
+    if (presetLanguage  && languages.includes(presetLanguage)) {
       // the language is in the URL, so use that language!
       activateLanguage(presetLanguage);
 
