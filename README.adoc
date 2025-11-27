@@ -3,7 +3,8 @@
 
 
 == Overview
-This repository contains a number of samples for https://github.com/spring-projects/spring-restdocs[Spring REST Docs] built using Spring Boot.
+This repository contains a number of samples for https://github.com/spring-projects/spring-restdocs[Spring REST Docs] 4.0 built using Spring Boot 4.0.
+For samples using Spring REST Docs 3.0 and Spring Boot 3.5, please see the https://github.com/spring-projects/spring-restdocs-samples/tree/3.0.x[3.0.x branch].
 
 
 
@@ -32,19 +33,6 @@ This repository contains a number of samples for https://github.com/spring-proje
 | link:web-test-client[web-test-client]
 | Gradle
 | Demonstrates the use of Spring REST Docs with Spring WebFlux’s WebTestClient.
-
-|===
-
-
-
-=== REST Assured
-
-|===
-| Sample | Build System | Description
-
-| link:rest-assured[rest-assured]
-| Gradle
-| Demonstrates the use of Spring REST Docs with https://rest-assured.io[REST Assured].
 
 |===
 

@@ -42,6 +42,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
@@ -51,11 +52,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import jakarta.servlet.RequestDispatcher;
+import tools.jackson.databind.json.JsonMapper;
 
-@SpringBootTest
+@SpringBootTest(properties = "debug=true")
 @ExtendWith(RestDocumentationExtension.class)
 class ApiDocumentation {
 
@@ -66,7 +66,7 @@ class ApiDocumentation {
 	private TagRepository tagRepository;
 
 	@Autowired
-	private ObjectMapper objectMapper;
+	private JsonMapper jsonMapper;
 
 	@Autowired
 	private WebApplicationContext context;
@@ -144,7 +144,7 @@ class ApiDocumentation {
 		String tagLocation = this.mockMvc
 				.perform(
 						post("/tags").contentType(MediaTypes.HAL_JSON).content(
-								this.objectMapper.writeValueAsString(tag)))
+								this.jsonMapper.writeValueAsString(tag)))
 				.andExpect(status().isCreated()).andReturn().getResponse()
 				.getHeader("Location");
 
@@ -155,7 +155,7 @@ class ApiDocumentation {
 
 		this.mockMvc.perform(
 				post("/notes").contentType(MediaTypes.HAL_JSON).content(
-						this.objectMapper.writeValueAsString(note))).andExpect(
+						this.jsonMapper.writeValueAsString(note))).andExpect(
 				status().isCreated())
 				.andDo(document("notes-create-example",
 						requestFields(
@@ -172,7 +172,7 @@ class ApiDocumentation {
 		String tagLocation = this.mockMvc
 				.perform(
 						post("/tags").contentType(MediaTypes.HAL_JSON).content(
-								this.objectMapper.writeValueAsString(tag)))
+								this.jsonMapper.writeValueAsString(tag)))
 				.andExpect(status().isCreated()).andReturn().getResponse()
 				.getHeader("Location");
 
@@ -184,7 +184,7 @@ class ApiDocumentation {
 		String noteLocation = this.mockMvc
 				.perform(
 						post("/notes").contentType(MediaTypes.HAL_JSON).content(
-								this.objectMapper.writeValueAsString(note)))
+								this.jsonMapper.writeValueAsString(note)))
 				.andExpect(status().isCreated()).andReturn().getResponse()
 				.getHeader("Location");
 
@@ -233,7 +233,7 @@ class ApiDocumentation {
 
 		this.mockMvc.perform(
 				post("/tags").contentType(MediaTypes.HAL_JSON).content(
-						this.objectMapper.writeValueAsString(tag)))
+						this.jsonMapper.writeValueAsString(tag)))
 				.andExpect(status().isCreated())
 				.andDo(document("tags-create-example",
 						requestFields(
@@ -249,7 +249,7 @@ class ApiDocumentation {
 		String noteLocation = this.mockMvc
 				.perform(
 						post("/notes").contentType(MediaTypes.HAL_JSON).content(
-								this.objectMapper.writeValueAsString(note)))
+								this.jsonMapper.writeValueAsString(note)))
 				.andExpect(status().isCreated()).andReturn().getResponse()
 				.getHeader("Location");
 
@@ -265,7 +265,7 @@ class ApiDocumentation {
 		String tagLocation = this.mockMvc
 				.perform(
 						post("/tags").contentType(MediaTypes.HAL_JSON).content(
-								this.objectMapper.writeValueAsString(tag)))
+								this.jsonMapper.writeValueAsString(tag)))
 				.andExpect(status().isCreated()).andReturn().getResponse()
 				.getHeader("Location");
 
@@ -274,7 +274,7 @@ class ApiDocumentation {
 
 		this.mockMvc.perform(
 				patch(noteLocation).contentType(MediaTypes.HAL_JSON).content(
-						this.objectMapper.writeValueAsString(noteUpdate)))
+						this.jsonMapper.writeValueAsString(noteUpdate)))
 				.andExpect(status().isNoContent())
 				.andDo(document("note-update-example",
 						requestFields(
@@ -291,7 +291,7 @@ class ApiDocumentation {
 		String tagLocation = this.mockMvc
 				.perform(
 						post("/tags").contentType(MediaTypes.HAL_JSON).content(
-								this.objectMapper.writeValueAsString(tag)))
+								this.jsonMapper.writeValueAsString(tag)))
 				.andExpect(status().isCreated()).andReturn().getResponse()
 				.getHeader("Location");
 
@@ -316,7 +316,7 @@ class ApiDocumentation {
 		String tagLocation = this.mockMvc
 				.perform(
 						post("/tags").contentType(MediaTypes.HAL_JSON).content(
-								this.objectMapper.writeValueAsString(tag)))
+								this.jsonMapper.writeValueAsString(tag)))
 				.andExpect(status().isCreated()).andReturn().getResponse()
 				.getHeader("Location");
 
@@ -325,7 +325,7 @@ class ApiDocumentation {
 
 		this.mockMvc.perform(
 				patch(tagLocation).contentType(MediaTypes.HAL_JSON).content(
-						this.objectMapper.writeValueAsString(tagUpdate)))
+						this.jsonMapper.writeValueAsString(tagUpdate)))
 				.andExpect(status().isNoContent())
 				.andDo(document("tag-update-example",
 						requestFields(

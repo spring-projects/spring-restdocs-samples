@@ -19,7 +19,7 @@ package com.example.notes;
 import java.util.Map;
 
 import org.springframework.boot.web.error.ErrorAttributeOptions;
-import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
+import org.springframework.boot.webmvc.error.DefaultErrorAttributes;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
@@ -32,7 +32,7 @@ class ExceptionSupressingErrorAttributes extends DefaultErrorAttributes {
 			ErrorAttributeOptions options) {
 		Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, options);
 		errorAttributes.remove("exception");
-		Object message = webRequest.getAttribute("javax.servlet.error.message", RequestAttributes.SCOPE_REQUEST);
+		Object message = webRequest.getAttribute("jakarta.servlet.error.message", RequestAttributes.SCOPE_REQUEST);
 		if (message != null) {
 			errorAttributes.put("message", message);
 		}

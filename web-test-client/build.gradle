@@ -1,7 +1,7 @@
 plugins {
 	id "java"
-	id "org.asciidoctor.jvm.convert" version "3.3.2"
-	id "org.springframework.boot" version "3.5.0"
+	id "org.asciidoctor.jvm.convert" version "4.0.5"
+	id "org.springframework.boot" version "4.0.0"
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -12,8 +12,10 @@ repositories {
 
 group = 'com.example'
 
-sourceCompatibility = 17
-targetCompatibility = 17
+java {
+	sourceCompatibility = 17
+	targetCompatibility = 17
+}
 
 ext {
 	snippetsDir = file('build/generated-snippets')
@@ -21,6 +23,10 @@ ext {
 
 configurations {
 	asciidoctorExtensions
+}
+
+asciidoctorj {
+	version = "3.0.0"
 }
 
 dependencies {
@@ -32,19 +38,19 @@ dependencies {
 	testImplementation 'org.springframework.restdocs:spring-restdocs-webtestclient'
 }
 
-test {
+tasks.named("test") {
 	useJUnitPlatform()
 	outputs.dir snippetsDir
 }
 
-asciidoctor {
+tasks.named("asciidoctor") {
 	configurations "asciidoctorExtensions"
 	inputs.dir snippetsDir
 	dependsOn test
 }
 
-bootJar {
-	dependsOn asciidoctor
+tasks.named("bootJar") {
+	dependsOn tasks.named("asciidoctor")
 	from ("${asciidoctor.outputDir}") {
 		into 'static/docs'
 	}

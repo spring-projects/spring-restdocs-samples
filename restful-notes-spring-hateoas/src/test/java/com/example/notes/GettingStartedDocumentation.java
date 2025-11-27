@@ -49,8 +49,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 import com.jayway.jsonpath.JsonPath;
 
 @SpringBootTest
@@ -58,7 +57,7 @@ import com.jayway.jsonpath.JsonPath;
 public class GettingStartedDocumentation {
 
 	@Autowired
-	private ObjectMapper objectMapper;
+	private JsonMapper jsonMapper;
 
 	@Autowired
 	private WebApplicationContext context;
@@ -84,7 +83,7 @@ public class GettingStartedDocumentation {
 	}
 
 	@Test
-	void creatingANote() throws JsonProcessingException, Exception {
+	void creatingANote() throws Exception {
 		String noteLocation = createNote();
 		MvcResult note = getNote(noteLocation);
 
@@ -107,7 +106,7 @@ public class GettingStartedDocumentation {
 		String noteLocation = this.mockMvc
 				.perform(
 						post("/notes").contentType(MediaTypes.HAL_JSON).content(
-								objectMapper.writeValueAsString(note)))
+								jsonMapper.writeValueAsString(note)))
 				.andExpect(status().isCreated())
 				.andExpect(header().string("Location", notNullValue()))
 				.andReturn().getResponse().getHeader("Location");
@@ -123,14 +122,14 @@ public class GettingStartedDocumentation {
 				.andReturn();
 	}
 
-	private String createTag() throws Exception, JsonProcessingException {
+	private String createTag() throws Exception {
 		Map<String, String> tag = new HashMap<String, String>();
 		tag.put("name", "getting-started");
 
 		String tagLocation = this.mockMvc
 				.perform(
 						post("/tags").contentType(MediaTypes.HAL_JSON).content(
-								objectMapper.writeValueAsString(tag)))
+								jsonMapper.writeValueAsString(tag)))
 				.andExpect(status().isCreated())
 				.andExpect(header().string("Location", notNullValue()))
 				.andReturn().getResponse().getHeader("Location");
@@ -152,7 +151,7 @@ public class GettingStartedDocumentation {
 		String noteLocation = this.mockMvc
 				.perform(
 						post("/notes").contentType(MediaTypes.HAL_JSON).content(
-								objectMapper.writeValueAsString(note)))
+								jsonMapper.writeValueAsString(note)))
 				.andExpect(status().isCreated())
 				.andExpect(header().string("Location", notNullValue()))
 				.andReturn().getResponse().getHeader("Location");
@@ -171,7 +170,7 @@ public class GettingStartedDocumentation {
 
 		this.mockMvc.perform(
 				patch(noteLocation).contentType(MediaTypes.HAL_JSON).content(
-						objectMapper.writeValueAsString(update)))
+						jsonMapper.writeValueAsString(update)))
 				.andExpect(status().isNoContent());
 	}
 
